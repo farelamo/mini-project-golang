@@ -28,11 +28,11 @@ func main(){
 		fmt.Println("Success read file environment")
 	}
 
-	// port, _ := strconv.Atoi()
+	port, _ := strconv.Atoi(os.Getenv("PGPORT"))
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", 
 		os.Getenv("PGHOST"), 
-		os.Getenv("PGPORT"), 
+		port, 
 		os.Getenv("PGUSER"), 
 		os.Getenv("PGPASSWORD"), 
 		os.Getenv("PGDATABASE"),
@@ -58,5 +58,5 @@ func main(){
 	router.PUT("/persons/:id", controllers.UpdatePerson)
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
-	router.Run(":"+os.Getenv("PORT"))
+	router.Run(":" + os.Getenv("PGPORT"))
 }
