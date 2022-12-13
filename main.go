@@ -28,10 +28,15 @@ func main(){
 		fmt.Println("Success read file environment")
 	}
 
-	port, err := strconv.Atoi(os.Getenv("DB_PORT"))
+	port, _ := strconv.Atoi(os.Getenv("PGPORT"))
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", 
-	os.Getenv("DB_HOST"), port, os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
+		os.Getenv("PGHOST"), 
+		port, 
+		os.Getenv("PGUSER"), 
+		os.Getenv("PGPASSWORD"), 
+		os.Getenv("PGDATABASE"),
+	)
 	
 	DB, err  = sql.Open("postgres", psqlInfo)
 	err = DB.Ping()
