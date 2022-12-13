@@ -58,5 +58,5 @@ func main(){
 	router.PUT("/persons/:id", controllers.UpdatePerson)
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
-	router.Run("localhost:8000")
+	router.Run(":"+os.Getenv("PGPORT"))
 }
